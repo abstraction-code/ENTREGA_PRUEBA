@@ -1,0 +1,52 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/table.css">
+</head>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+  <main>
+
+    <div class="hero">
+      <!-- Hero -->
+      <div class="p-5 text-center bg-image rounded-3" style="background-image: url('https://img.freepik.com/foto-gratis/lindo-perrito-haciendose-pasar-persona-negocios_23-2148985938.jpg');height: 400px;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white p-1">
+              <h1 class="mb-3">¿ALO GUAF-GUAF? </h1>
+              <h4 class="mb-3">Noticias informativas de tus compañeros perrunos</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Hero -->
+      <div class="container mt-5">
+        <h4 class="mb-3">Ultimas noticias de cuatro patas </h4>
+
+        <!-- Si noticias existe -->
+        <div class="row">
+          <% if (posts && posts.length > 0) { %>
+          <% posts.forEach(post => { %>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <img src="<%= post.img %>" class="card-img-top" alt="img,perro">
+              <div class="card-body">
+                <h5 class="card-title"><%= post.title %></h5>
+                <p class="card-text"><%= post.content.slice(0, 50) %>...</p>
+								<p class="card-text">Fecha: <%= post.createdAt.toLocaleDateString() %></p>
+                <a href="/post/<%= post.id %>" class="btn btn-primary">Leer más</a>
+              </div>
+							
+
+            </div>
+          </div>
+          <% }) %>
+          <% } else { %>
+          <div class="col-md-12">
+            <h5>No Hay noticias</h5>
+          </div>
+          <% } %>
+        </div>
+      </div>
+  </main>
+  <%- include('./includes/end.ejs') %>

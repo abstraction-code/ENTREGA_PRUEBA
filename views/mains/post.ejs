@@ -1,0 +1,66 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/table.css">
+<!-- Agregar la siguiente línea para importar Bootstrap -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <main class="container py-4">
+
+
+    <!-- Si noticias existe -->
+    <div class="card mb-4">
+      <img src="<%= post.img %>" class="card-img-top" alt="img,perro">
+      <div class="card-body">
+        <h3 class="card-title"><%= post.title %></h3>
+				<p class="card-text"><%= post.content %></p>
+				<p class="card-text">Fecha: <%= post.createdAt.toLocaleDateString() %></p>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <form class="auth-form" action="/addComment" method="POST">
+              <input type="hidden" required name="postId" value="<%= post.id %>">
+              <div class="mb-3">
+                <label for="commentText" class="form-label">Añadir comentario</label>
+                <input type="text" required name="commentText" id="commentText" class="form-control">
+              </div>
+              <button class="btn btn-primary" type="submit">Publicar</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Comentarios</h5>
+            <% if (comments.length > 0) { %>
+            <ul class="list-unstyled">
+              <% comments.forEach(c=> { %>
+              <li class="mb-3">
+                🔼 <%= c.content %>
+              </li>
+              <% }) %>
+            </ul>
+            <% } else { %>
+            <h3 class="text-center">No Hay Comentarios</h3>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <!-- Aquí puedes agregar algún contenido relacionado con el post si lo deseas -->
+      </div>
+    </div>
+  </main>
+
+  <%- include('../includes/end.ejs') %>
+  <!-- Agregar la siguiente línea para importar Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>

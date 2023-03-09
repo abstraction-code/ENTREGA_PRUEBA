@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/auth.css">
+<!-- Incluir Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEK6xRs/IkXpX9JVoRxlt+" crossorigin="anonymous">
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+
+  <main class="container">
+    <% if (errorMessage) { %>
+    <div class="alert alert-danger">
+      <%= errorMessage %>
+    </div>
+    <% } %>
+    <% if (user){ %>
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="mb-0"><%= user.name%></h4>
+      <form class="logout-form" action="/logout" method="POST">
+        <button class="btn btn-primary" type="submit">Cerrar sesión</button>
+      </form>
+    </div>
+
+    <% }else { %>
+    <form class="auth-form max-500" action="/login" method="POST">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" required name="email" id="email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" required name="password" id="password" class="form-control">
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a class="btn btn-link" href="/register">Registro</a>
+      </div>
+
+    </form>
+
+    <% }%>
+  </main>
+  <!-- Incluir Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-kIPT/DMWW2fyHbGusB1sTtldtaV7mCrZcBCJ9XQ2m4GxKjNOkkJqx3qF7ccrzpG+" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqyfFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+1s0dzl" crossorigin="anonymous"></script>
+  <%- include('../includes/end.ejs') %>
